@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anmelden HAK Zell Kurzfilme</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg:      #0d0c0b;
+  --raised:  #161412;
+  --text:    #ddd8ce;
+  --dim:     #6b6560;
+  --accent:  #3eb385;
+  --border:  #252220;
+  --error:   #c84a3a;
+  --success: #5aab6e;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/*   Header   */
+header {
+  padding: 52px 8% 48px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.header-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/*   Form section   */
+.form-section {
+  padding: 72px 8%;
+  max-width: 840px;
+}
+
+.section-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+
+.form-intro {
+  color: var(--dim);
+  font-size: 0.95rem;
+  margin-bottom: 48px;
+  max-width: 520px;
+  line-height: 1.75;
+}
+
+/*   Form   */
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 32px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+input, select, textarea {
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  padding: 11px 14px;
+  transition: border-color 0.18s;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--dim);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+select option {
+  background: var(--raised);
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.field-hint {
+  font-size: 0.78rem;
+  color: var(--dim);
+  margin-top: -2px;
+}
+
+/*   Submit   */
+.submit-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+button[type="submit"] {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  padding: 13px 30px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: opacity 0.18s;
+}
+
+button[type="submit"]:hover:not(:disabled) { opacity: 0.82; }
+button[type="submit"]:disabled { opacity: 0.4; cursor: not-allowed; }
+
+#status {
+  font-size: 0.9rem;
+  display: none;
+}
+
+#status.success { color: var(--success); display: block; }
+#status.error   { color: var(--error);   display: block; }
+
+/*   Back link   */
+.back-link {
+  display: inline-block;
+  margin-top: 52px;
+  color: var(--dim);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.18s;
+}
+
+.back-link:hover { color: var(--text); }
+
+/*   Footer   */
+footer {
+  padding: 26px 8%;
+  color: var(--dim);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/*   Responsive   */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 36px 6% 32px;
+  }
+
+  .form-section { padding: 52px 6%; }
+
+  form { grid-template-columns: 1fr; }
+
+  .field.full { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="HAK Zell Logo" class="logo">
+  <div>
+    <div class="header-eyebrow">HAK Zell am See</div>
+    <h1>Kurzfilme</h1>
+  </div>
+</header>
+
+<div class="form-section">
+  <div class="section-label">Teilnahme</div>
+  <h2>Anmeldeformular</h2>
+  <p class="form-intro">
+    Du möchtest bei einem unserer Filmprojekte mitwirken? Füll das Formular
+    aus; wir melden uns bei dir.
+  </p>
+
+  <form id="form" novalidate>
+
+    <div class="field">
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" placeholder="Vor- und Nachname" required>
+    </div>
+
+    <div class="field">
+      <label for="klasse">Klasse *</label>
+      <input type="text" id="klasse" name="klasse" placeholder="z. B. 2AK" required>
+    </div>
+
+    <div class="field">
+      <label for="alter">Alter</label>
+      <input type="number" id="alter" name="alter" placeholder="z. B. 16" min="10" max="30">
+    </div>
+
+    <div class="field">
+      <label for="kontakt">E-Mail oder Telefon *</label>
+      <input type="text" id="kontakt" name="kontakt" placeholder="wie wir dich erreichen können" required>
+    </div>
+
+    <div class="field">
+      <label for="rolle">Gewünschte Rolle *</label>
+      <select id="rolle" name="rolle" required>
+        <option value="" disabled selected>Rolle wählen</option>
+        <option value="Schauspiel">Schauspiel</option>
+        <option value="Kamera">Kamera</option>
+        <option value="Schnitt">Schnitt</option>
+        <option value="Regie">Regie</option>
+        <option value="Drehbuch">Drehbuch</option>
+        <option value="Produktion">Produktion</option>
+        <option value="Sonstiges">Sonstiges</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="film">Projekt *</label>
+      <select id="film" name="film" required>
+        <option value="" disabled selected>Projekt wählen</option>
+        <option value="Kill You!">Kill You!</option>
+      </select>
+    </div>
+
+    <div class="field full">
+      <label for="anmerkungen">Anmerkungen</label>
+      <textarea id="anmerkungen" name="anmerkungen" placeholder="Erfahrungen, Fragen oder sonstige Hinweise (optional)"></textarea>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" id="submit-btn">Absenden</button>
+      <span id="status"></span>
+    </div>
+
+  </form>
+
+  <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+</div>
+
+<footer>
+  <span>© 2026 HAK Zell Kurzfilme</span>
+  <span>Zell am See, Österreich</span>
+</footer>
+
+<script>
+const CONTACT_EMAIL = 'hzkurzfilme@gmail.com';
+
+document.getElementById('form').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const name    = document.getElementById('name').value.trim();
+  const klasse  = document.getElementById('klasse').value.trim();
+  const alter   = document.getElementById('alter').value.trim();
+  const kontakt = document.getElementById('kontakt').value.trim();
+  const rolle   = document.getElementById('rolle').value;
+  const film    = document.getElementById('film').value;
+  const anmerk  = document.getElementById('anmerkungen').value.trim();
+
+  if (!name || !klasse || !kontakt || !rolle || !film) {
+    showStatus('Bitte alle Pflichtfelder (*) ausfüllen.', 'error');
+    return;
+  }
+
+  const subject = `Teilnahme: ${name} – ${rolle} (${film})`;
+
+  let body =
+    `Name: ${name}\n` +
+    `Klasse: ${klasse}\n` +
+    (alter ? `Alter: ${alter}\n` : '') +
+    `Kontakt: ${kontakt}\n` +
+    `Rolle: ${rolle}\n` +
+    `Projekt: ${film}`;
+
+  if (anmerk) body += `\n\nAnmerkungen:\n${anmerk}`;
+
+  const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  const a = document.createElement('a');
+  a.href = mailto;
+  a.click();
+
+  document.getElementById('form').style.display = 'none';
+  showStatus('Dein E-Mail-Programm wurde geöffnet. Bitte die E-Mail absenden, um die Anmeldung abzuschließen.', 'success');
+});
+
+function showStatus(msg, type) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = type;
+}
+</script>
+
+</body>
+</html>

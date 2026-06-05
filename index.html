@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAK Zell Kurzfilme</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg:      #0d0c0b;
+  --raised:  #161412;
+  --text:    #ddd8ce;
+  --dim:     #6b6560;
+  --accent:  #3eb385;
+  --border:  #252220;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/*   Header   */
+header {
+  padding: 52px 8% 48px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.header-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+header .tagline {
+  margin-top: 8px;
+  color: var(--dim);
+  font-size: 0.9rem;
+}
+
+/*   Nav   */
+nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0 8%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+
+nav a {
+  color: var(--dim);
+  text-decoration: none;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 17px 18px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.18s, border-color 0.18s;
+  white-space: nowrap;
+}
+
+nav a:hover {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/*   Sections   */
+section {
+  padding: 88px 8%;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 52px;
+}
+
+/*   Films   */
+.film-feature {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 56px;
+  align-items: start;
+  max-width: 860px;
+}
+
+.film-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 3px;
+  display: block;
+}
+
+.film-info {
+  padding-top: 4px;
+}
+
+.film-meta {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.film-info h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.02;
+  margin-bottom: 22px;
+}
+
+.film-info p {
+  color: var(--dim);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  margin-bottom: 14px;
+  max-width: 480px;
+}
+
+.film-tag {
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-top: 8px;
+}
+
+/*   About   */
+.about-body {
+  max-width: 680px;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--dim);
+}
+
+.about-body strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/*   Team   */
+.credits {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 760px;
+}
+
+.credit-item {
+  background: var(--bg);
+  padding: 28px 22px;
+  transition: background 0.18s;
+}
+
+.credit-item:hover {
+  background: var(--raised);
+}
+
+.credit-role {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.67rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.credit-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.15rem;
+  color: var(--dim);
+}
+
+/*   Mitmachen   */
+.join-body {
+  max-width: 560px;
+  color: var(--dim);
+  font-size: 0.98rem;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.btn {
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 13px 30px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: opacity 0.18s;
+}
+
+.btn:hover { opacity: 0.82; }
+
+/*   Contact   */
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  font-size: 0.97rem;
+}
+
+.contact-key {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  min-width: 64px;
+}
+
+.contact-val {
+  color: var(--text);
+}
+
+.contact-val a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-val a:hover {
+  text-decoration: underline;
+}
+
+/*   Footer   */
+footer {
+  padding: 26px 8%;
+  color: var(--dim);
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/*   Responsive   */
+@media (max-width: 640px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 36px 6% 32px;
+  }
+
+  nav { padding: 0 6%; }
+
+  section { padding: 60px 6%; }
+
+  .film-feature {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .film-poster {
+    aspect-ratio: 4 / 3;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="HAK Zell Logo" class="logo">
+  <div>
+    <div class="header-eyebrow">HAK Zell am See</div>
+    <h1>Kurzfilme</h1>
+    <p class="tagline">Schülerfilmprojekte der Handelsschule Zell am See</p>
+  </div>
+</header>
+
+<nav>
+  <a href="#filme">Filme</a>
+  <a href="#ueber">Über uns</a>
+  <a href="#team">Team</a>
+  <a href="#mitmachen">Mitmachen</a>
+  <a href="#kontakt">Kontakt</a>
+</nav>
+
+<section id="filme">
+  <div class="section-label">01. Laufende Projekte</div>
+  <h2>Unsere Kurzfilme</h2>
+
+  <div class="film-feature">
+    <img src="killyou.jpg" alt="Kill You! – Filmplakat" class="film-poster">
+    <div class="film-info">
+      <div class="film-meta">Projekt 001 &nbsp;/&nbsp; 2026</div>
+      <h3>Kill You!</h3>
+      <p>
+        Ein Kurzfilm nach dem Jugendroman „Kill You!" von Daniel Höra.
+        Die Geschichte folgt einem Jugendlichen, der in einen gefährlichen
+        Sog ,der durch sein lieblings Viedeospiel ensteht, gerät
+      </p>
+      <p>
+        Regie, Kamera und Schnitt vollständig von Schülerinnen und
+        Schülern der HAK Zell am See.
+      </p>
+      <span class="film-tag">In Produktion</span>
+    </div>
+  </div>
+</section>
+
+<section id="ueber">
+  <div class="section-label">02. Wir</div>
+  <h2>Über uns</h2>
+
+  <p class="about-body">
+    Die Kurzfilmprojekte der <strong>HAK Zell am See</strong> entstehen aus dem
+    Engagement unserer Schülerinnen und Schüler, die kreative Ideen auf die Leinwand
+    bringen wollen. Wir produzieren <strong>Kurzfilme, Trailer und
+    Behind-the-Scenes-Material</strong>; von der ersten Idee über das Drehbuch
+    bis zum fertigen Schnitt. Jedes Projekt ist ein gemeinsames Werk, das Schule
+    und Film verbindet.
+  </p>
+</section>
+
+<section id="team">
+  <div class="section-label">03. Credits</div>
+  <h2>Das Team</h2>
+
+  <div class="credits">
+    <div class="credit-item">
+      <div class="credit-role">Regie</div>
+      <div class="credit-name">.</div>
+    </div>
+    <div class="credit-item">
+      <div class="credit-role">Kamera</div>
+      <div class="credit-name">.</div>
+    </div>
+    <div class="credit-item">
+      <div class="credit-role">Schnitt</div>
+      <div class="credit-name">.</div>
+    </div>
+    <div class="credit-item">
+      <div class="credit-role">Drehbuch</div>
+      <div class="credit-name">.</div>
+    </div>
+    <div class="credit-item">
+      <div class="credit-role">Producer</div>
+      <div class="credit-name">.</div>
+    </div>
+  </div>
+</section>
+
+<section id="mitmachen">
+  <div class="section-label">04. Teilnahme</div>
+  <h2>Mitmachen</h2>
+
+  <p class="join-body">
+    Du möchtest bei einem Kurzfilmprojekt mitwirken? Ob Schauspiel,
+    Kameraarbeit, Schnitt, Regie oder Drehbuch; wir freuen uns über
+    jede Unterstützung. Fülle das Formular aus und werde Teil unseres
+    nächsten Projekts.
+  </p>
+
+  <a href="teilnehmen.html" class="btn">Jetzt anmelden</a>
+</section>
+
+<section id="kontakt">
+  <div class="section-label">05. Kontakt</div>
+  <h2>Kontakt</h2>
+
+  <div class="contact-list">
+    <div class="contact-row">
+      <span class="contact-key">Web</span>
+      <span class="contact-val">www.hakzell-kurzfilme.de</span>
+    </div>
+    <div class="contact-row">
+      <span class="contact-key">E-Mail</span>
+      <span class="contact-val">
+        <a href="mailto:hzkurzfilme@gmail.com">hzkurzfilme@gmail.com</a>
+      </span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 HAK Zell Kurzfilme</span>
+  <span>Zell am See, Österreich</span>
+</footer>
+
+</body>
+</html>
